@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    config:
+      profile: dev
+      name: application-zuul
+      discovery:
+        service-id: AIGOU-CONFIG #配置中心集群配置
+        enabled: true
+#注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://root:root@localhost:8761/eureka/

@@ -4,12 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-basic" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-basic/basic-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aigou-config-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-eureka" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-plat-parent" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-plat-parent" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-plat-parent/plat-inrterface" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-plat-parent/plat-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-plat-parent/plat-services" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-plat-parents" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-plat-parents/plat-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-plat-parents/plat-service" charset="UTF-8" />

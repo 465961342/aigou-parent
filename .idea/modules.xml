@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/aigou-basic/aigou-basic.iml" filepath="$PROJECT_DIR$/aigou-basic/aigou-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aigou-config-service/aigou-config-service.iml" filepath="$PROJECT_DIR$/aigou-config-service/aigou-config-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/aigou-eureka/aigou-eureka.iml" filepath="$PROJECT_DIR$/aigou-eureka/aigou-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/aigou-parent.iml" filepath="$PROJECT_DIR$/aigou-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/aigou-plat-parents/aigou-plat-parents.iml" filepath="$PROJECT_DIR$/aigou-plat-parents/aigou-plat-parents.iml" />

@@ -13,6 +13,7 @@
         <module>aigou-plat-parents</module>
         <module>aigou-basic</module>
         <module>aigou-zuul</module>
+        <module>aigou-config-service</module>
     </modules>
 
     <properties>
