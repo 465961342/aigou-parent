@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/jingjingwoxiangni/aigou-config.git
+          uri: https://github.com/465961342/aigou-config.git
   application:
     name: AIGOU-CONFIG
 
