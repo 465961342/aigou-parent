@@ -1,21 +1,22 @@
-package cn.itsource.aigou.util;
+package cn.itsource.basic.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 分页工具类
- * @param <T>
+ * @author 卡卡罗特
  */
 public class PageList<T> {
-    private Integer total = 0;
+
+    private Long total = 0L;
     private List<T> rows = new ArrayList<>();
 
-    public Integer getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
@@ -27,11 +28,11 @@ public class PageList<T> {
         this.rows = rows;
     }
 
-    public PageList(Integer total, List<T> rows) {
-        this.total = total;
-        this.rows = rows;
+    public PageList() {
     }
 
-    public PageList() {
+    public PageList(Long total, List<T> rows) {
+        this.total = total;
+        this.rows = rows;
     }
 }

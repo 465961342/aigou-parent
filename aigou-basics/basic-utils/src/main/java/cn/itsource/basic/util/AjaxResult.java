@@ -1,4 +1,4 @@
-package cn.itsource.aigou.util;
+package cn.itsource.basic.util;
 
 /**
  * Ajax请求结果封装的工具类
