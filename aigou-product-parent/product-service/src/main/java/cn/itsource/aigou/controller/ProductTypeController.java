@@ -1,9 +1,11 @@
 package cn.itsource.aigou.controller;
 
+import cn.itsource.aigou.domain.Product;
 import cn.itsource.aigou.service.IProductTypeService;
 import cn.itsource.aigou.domain.ProductType;
 import cn.itsource.aigou.query.ProductTypeQuery;
 import cn.itsource.basic.util.AjaxResult;
+import cn.itsource.basic.util.LetterUtil;
 import cn.itsource.basic.util.PageList;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -85,5 +87,14 @@ public class ProductTypeController {
         Page<ProductType> page = new Page<ProductType>(query.getPage(),query.getRows());
         IPage<ProductType> ipage = productTypeService.page(page);
         return new PageList<ProductType>(ipage.getTotal(),ipage.getRecords());
+    }
+
+
+    /**
+     * 加载类型树
+     */
+    @RequestMapping(value = "/loadTypeTree",method = RequestMethod.GET)
+    public List<ProductType> loadTypeTree(){
+        return productTypeService.loadTypeTree();
     }
 }

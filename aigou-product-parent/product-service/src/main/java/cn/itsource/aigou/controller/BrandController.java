@@ -4,7 +4,9 @@ import cn.itsource.aigou.service.IBrandService;
 import cn.itsource.aigou.domain.Brand;
 import cn.itsource.aigou.query.BrandQuery;
 import cn.itsource.basic.util.AjaxResult;
+import cn.itsource.basic.util.LetterUtil;
 import cn.itsource.basic.util.PageList;
+import cn.itsource.basic.util.StrUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class BrandController {
             if(brand.getId()!=null){
                 brandService.updateById(brand);
             }else{
+                brand.setFirstLetter(LetterUtil.getFirstLetter(brand.getName()));
                 brandService.save(brand);
             }
             return AjaxResult.me();
@@ -50,6 +53,23 @@ public class BrandController {
             return AjaxResult.me();
         } catch (Exception e) {
         e.printStackTrace();
+            return AjaxResult.me().setMessage("删除对象失败！"+e.getMessage());
+        }
+    }
+
+    /**
+     * 批量删除对象信息
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value="/deleteBatch",method=RequestMethod.DELETE)
+    public AjaxResult delete(@RequestParam("ids") String ids){
+        try {
+            List<Long> list = StrUtils.splitStr2LongArr(ids);
+            brandService.removeByIds(list);
+            return AjaxResult.me();
+        } catch (Exception e) {
+            e.printStackTrace();
             return AjaxResult.me().setMessage("删除对象失败！"+e.getMessage());
         }
     }
@@ -82,8 +102,6 @@ public class BrandController {
     @RequestMapping(value = "/json",method = RequestMethod.POST)
     public PageList<Brand> json(@RequestBody BrandQuery query)
     {
-        Page<Brand> page = new Page<Brand>(query.getPage(),query.getRows());
-        IPage<Brand> ipage = brandService.page(page);
-        return new PageList<Brand>(ipage.getTotal(),ipage.getRecords());
+        return brandService.queryPage(query);
     }
 }
