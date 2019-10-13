@@ -1,7 +1,7 @@
 package cn.itsource.aigou.controller;
 
 import cn.itsource.aigou.domain.User;
-import cn.itsource.aigou.util.AjaxResult;
+import cn.itsource.basic.util.AjaxResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

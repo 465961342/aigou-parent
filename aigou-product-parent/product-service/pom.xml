@@ -3,16 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>aigou-plat-parents</artifactId>
+        <artifactId>aigou-product-parent</artifactId>
         <groupId>cn.itsource</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>plat-service</artifactId>
+    <artifactId>product-service</artifactId>
 
     <dependencies>
-
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -23,36 +22,45 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
+        <!--basic-util-->
         <dependency>
             <groupId>cn.itsource</groupId>
             <artifactId>basic-utils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--product-interface-->
         <dependency>
             <groupId>cn.itsource</groupId>
-            <artifactId>plat-interface</artifactId>
+            <artifactId>product-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--swagger依赖-->
+        <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
         <!--config-client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-
+        <!--mybatis-plus-starter-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <!--mysql-connector-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.13</version>
+        </dependency>
     </dependencies>
-
 </project>

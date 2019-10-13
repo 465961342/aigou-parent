@@ -35,8 +35,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("平台服务api")
-                .description("平台服务接口文档说明")
+                .title("商品服务api")
+                .description("商品服务接口文档说明")
                 .contact(new Contact("LJWQ", "", " LJWQ@itsource.cn"))
                 .version("1.0")
                 .build();
