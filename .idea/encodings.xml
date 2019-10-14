@@ -2,12 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-basic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-basic/basic-gengeator" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/aigou-basic/basic-util" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-basics" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-basics/basic-generator" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-basics/basic-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aigou-common-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aigou-common-parent/common-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aigou-common-parent/common-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-config-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aigou-plat-parents" charset="UTF-8" />

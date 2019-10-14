@@ -16,6 +16,7 @@
         <module>aigou-config-service</module>
         <module>aigou-product-parent</module>
         <module>aigou-basics</module>
+        <module>aigou-common-parent</module>
     </modules>
 
     <properties>

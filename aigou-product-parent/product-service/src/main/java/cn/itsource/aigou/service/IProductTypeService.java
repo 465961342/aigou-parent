@@ -2,6 +2,7 @@ package cn.itsource.aigou.service;
 
 import cn.itsource.aigou.domain.ProductType;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface IProductTypeService extends IService<ProductType> {
      * @return
      */
     List<ProductType> loadTypeTree();
+
+    void genHomePage();
 }
