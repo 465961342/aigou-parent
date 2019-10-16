@@ -126,7 +126,7 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
         //将所有的productType存入map中
         for (ProductType productType : allProductTypes) {
             productTypeMap.put(productType.getId(),productType);
-            productType.setChildren(null);
+            /*productType.setChildren(null);*/
         }
 
         //再循环组装数据
@@ -138,9 +138,9 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
                 //如果不是一级
                 ProductType parent = productTypeMap.get(productType.getPid());
 
-                if (parent.getChildren() == null) {
+                /*if (parent.getChildren() == null) {
                     parent.setChildren(new ArrayList<>());
-                }
+                }*/
                 //将该类型放到其父级类型的子级类型中
                 parent.getChildren().add(productType);
 
