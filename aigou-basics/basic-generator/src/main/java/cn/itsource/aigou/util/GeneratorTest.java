@@ -26,6 +26,8 @@ public class GeneratorTest {
         gc.setAuthor(rb.getString("author"));
         gc.setOpen(false);
         gc.setBaseResultMap(true);
+        //重新生成的代码覆盖之前的代码
+        gc.setFileOverride(true);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -114,7 +116,7 @@ public class GeneratorTest {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true);
         //生成哪些表的代码
-        strategy.setInclude("t_brand","t_product_type","t_product");
+        strategy.setInclude("t_product","t_product_comment","t_product_ext","t_sku","t_specification");
         strategy.setTablePrefix("t_");
         mpg.setStrategy(strategy);
         mpg.execute();

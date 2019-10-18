@@ -25,6 +25,36 @@
         <result column="goodCommentCount" property="goodCommentCount" />
         <result column="commonCommentCount" property="commonCommentCount" />
         <result column="badCommentCount" property="badCommentCount" />
+        <result column="skuProperties" property="skuProperties" />
+        <result column="medias" property="medias" />
+        <association property="productType" javaType="cn.itsource.aigou.domain.ProductType">
+            <id column="product_type_id" property="id"/>
+            <result column="typename" property="name"/>
+        </association>
+        <association property="brand" javaType="cn.itsource.aigou.domain.Brand">
+            <id column="brand_id" property="id"/>
+            <result column="brandname" property="name"/>
+        </association>
     </resultMap>
 
+    <select id="queryPage" resultMap="BaseResultMap">
+        SELECT p.*,pt.name typename,b.name brandname
+        from t_product p
+        LEFT JOIN t_product_type pt on p.product_type_id = pt.id
+        LEFT JOIN t_brand b on p.brand_id = b.id
+        <include refid="whereSql"></include>
+
+    </select>
+    <!--查询条件-->
+        <sql id="whereSql">
+            <where>
+                <if test="#{query.keyword}!=null">
+                    AND (
+                    p.name LIKE  concat('%',#{query.keyword},'%')
+                    OR
+                    p.subName LIKE  concat('%',#{query.keyword},'%')
+                    )
+                </if>
+            </where>
+        </sql>
 </mapper>
