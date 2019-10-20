@@ -4,6 +4,7 @@ import cn.itsource.aigou.domain.Specification;
 import cn.itsource.aigou.service.IProductService;
 import cn.itsource.aigou.domain.Product;
 import cn.itsource.aigou.query.ProductQuery;
+import cn.itsource.aigou.vo.SkusVo;
 import cn.itsource.basic.util.AjaxResult;
 import cn.itsource.basic.util.PageList;
 import cn.itsource.basic.util.StrUtils;
@@ -141,14 +142,27 @@ public class ProductController {
 
 
     /**
-     *   * 根据商品ID查询商品的显示属性
+     *   * 根据商品ID查询商品的sku属性
      *   * @param productId
      *   * @return
      *   
      */
     @GetMapping("/skuProperties/{productId}")
     public List<Specification> getSkuProperties(@PathVariable("productId") Long productId) {
-        System.out.println(productId);
         return productService.getSkuProperties(productId);
     }
+
+    /**
+     * 保存sku属性
+     * @param productId
+     * @param skusVo
+     * @return
+     */
+    @PostMapping("/updateSkuProperties")
+    public AjaxResult updateSkuProperties(@RequestParam("productId")Long productId,
+                                          @RequestBody SkusVo skusVo){
+        productService.saveSkuProperties(productId,skusVo.getSkuProperties(),skusVo.getSkus());
+        return AjaxResult.me();
+    }
+
 }

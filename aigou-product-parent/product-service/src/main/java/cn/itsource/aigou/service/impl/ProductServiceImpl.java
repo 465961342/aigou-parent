@@ -2,9 +2,11 @@ package cn.itsource.aigou.service.impl;
 
 import cn.itsource.aigou.domain.Product;
 import cn.itsource.aigou.domain.ProductExt;
+import cn.itsource.aigou.domain.Sku;
 import cn.itsource.aigou.domain.Specification;
 import cn.itsource.aigou.mapper.ProductExtMapper;
 import cn.itsource.aigou.mapper.ProductMapper;
+import cn.itsource.aigou.mapper.SkuMapper;
 import cn.itsource.aigou.mapper.SpecificationMapper;
 import cn.itsource.aigou.query.ProductQuery;
 import cn.itsource.aigou.service.IProductService;
@@ -16,12 +18,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,6 +41,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductExtMapper productExtMapper;
     @Autowired
     private SpecificationMapper specificationMapper;
+
+    @Autowired
+    private SkuMapper skuMapper;
     @Override
     @Transactional
     public boolean save(Product product) {
@@ -143,5 +150,44 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             specifications = JSONArray.parseArray(skuProperties,Specification.class);
         }
         return specifications;
+    }
+
+    /**
+     * 保存sku属性
+     *
+     * @param productId
+     * @param skuProperties
+     * @param skus
+     * @return
+     */
+    @Override
+    public void saveSkuProperties(Long productId, List<Specification> skuProperties, List<Map<String, String>> skus) {
+        String skuPropertie = JSON.toJSONString(skuProperties);
+        baseMapper.updateSkuProperties(productId,skuPropertie);
+
+        //维护sku表
+        //先删除之前的
+        skuMapper.delete(new QueryWrapper<Sku>().eq("product_id",productId));
+        //再添加新的
+        Sku sku = null;
+        for (Map<String, String> skuMap : skus) {//{"年龄":"xx","肤色":"xxx","price":0,"store":0,"indexs":"xxx_0_1"}
+        sku = new Sku();
+        //从参数中获取数据封装到sku对象中
+        sku.setCreateTime(System.currentTimeMillis());
+        sku.setProductId(productId);
+        //skuName
+        StringBuilder sb = new StringBuilder();
+        //map的遍历
+        for (Map.Entry<String, String> skuEntry : skuMap.entrySet()) {
+            if(!"price".equals(skuEntry.getKey())&&!"store".equals(skuEntry.getKey())&&!"indexs".equals(skuEntry.getKey())){
+                sb.append(skuEntry.getValue());
+            }
+        }
+            sku.setSkuName(sb.toString());
+            sku.setPrice(Integer.parseInt(skuMap.get("price")));
+            sku.setAvailableStock(Integer.parseInt(skuMap.get("store")));
+            sku.setIndexs(skuMap.get("indexs"));
+            skuMapper.insert(sku);
+        }
     }
 }
