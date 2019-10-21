@@ -38,5 +38,17 @@ public interface ProductMapper extends BaseMapper<Product> {
      */
     void updateSkuProperties(@Param("productId")Long productId, @Param("skuProperties")String skuPropertie);
 
+    /**
+     * 批量上架
+     * @param ids
+     * @param onSaleTime
+     */
+    void onSale(@Param("ids")List<Long> ids, @Param("onSaleTime")long onSaleTime);
 
+    /**
+     * 批量下架
+     * @param ids
+     * @param offSaleTime
+     */
+    void offSale(@Param("ids")List<Long> ids, @Param("offSaleTime")long offSaleTime);
 }

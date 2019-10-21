@@ -21,6 +21,42 @@ public class ProductController {
     @Autowired
     public IProductService productService;
 
+
+    /**
+       * 批量上架
+       * @param ids
+       * @return
+       */
+    @GetMapping("/onSale")
+    public AjaxResult onSale(@RequestParam("ids") String ids){
+        try {
+            List<Long> idList = StrUtils.splitStr2LongArr(ids);
+            productService.onSale(idList);
+            return AjaxResult.me().setMessage("上架成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage("上架失败!"+e.getMessage());
+        }
+    }
+
+    /**
+       * 批量下架
+       * @param ids
+       * @return
+       */
+    @GetMapping("/offSale")
+    public AjaxResult offSale(@RequestParam("ids") String ids){
+        try {
+            List<Long> idList = StrUtils.splitStr2LongArr(ids);
+            productService.offSale(idList);
+            return AjaxResult.me().setMessage("下架成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.me().setSuccess(false).setMessage("下架失败!"+e.getMessage());
+        }
+    }
+
+
     /**
      * 保存和修改公用的
      *

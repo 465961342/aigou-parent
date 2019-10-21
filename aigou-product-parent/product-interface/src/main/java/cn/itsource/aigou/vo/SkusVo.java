@@ -2,7 +2,6 @@ package cn.itsource.aigou.vo;
 
 import cn.itsource.aigou.domain.Specification;
 import lombok.Data;
-
 import java.util.List;
 import java.util.Map;
 

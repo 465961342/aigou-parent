@@ -48,7 +48,25 @@
         SET skuProperties = #{skuProperties}
         WHERE id = #{productId}
     </update>
+    <!--批量上架-->
+    <update id="onSale">
+        UPDATE t_product
+        SET onSaleTime=#{onSaleTime},state=1
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 
+    <!--批量下架-->
+    <update id="offSale">
+        UPDATE t_product
+        SET offSaleTime=#{offSaleTime},state=0
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 
     <select id="queryPage" resultMap="BaseResultMap">
         SELECT p.*,pt.name typename,b.name brandname
