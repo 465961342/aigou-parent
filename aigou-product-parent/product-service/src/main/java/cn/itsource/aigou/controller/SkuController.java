@@ -75,7 +75,6 @@ public class SkuController {
 
     /**
     * 分页查询数据
-    *
     * @param query 查询对象
     * @return PageList 分页对象
     */

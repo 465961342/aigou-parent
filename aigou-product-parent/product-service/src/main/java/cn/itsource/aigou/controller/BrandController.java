@@ -3,6 +3,7 @@ package cn.itsource.aigou.controller;
 import cn.itsource.aigou.service.IBrandService;
 import cn.itsource.aigou.domain.Brand;
 import cn.itsource.aigou.query.BrandQuery;
+import cn.itsource.aigou.vo.BrandVo;
 import cn.itsource.basic.util.AjaxResult;
 import cn.itsource.basic.util.LetterUtil;
 import cn.itsource.basic.util.PageList;
@@ -104,4 +105,16 @@ public class BrandController {
     {
         return brandService.queryPage(query);
     }
+
+    /**
+     * 根据类型编号查询品牌信息
+     * @param productTypeId
+     * @return
+     */
+    @GetMapping("/getByProductTypeId")
+    public BrandVo getByProductTypeId(@RequestParam("productTypeId")Long productTypeId){
+
+        return brandService.getByProductTypeId(productTypeId);
+    }
+
 }

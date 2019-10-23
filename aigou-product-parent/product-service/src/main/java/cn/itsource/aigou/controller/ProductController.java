@@ -1,5 +1,6 @@
 package cn.itsource.aigou.controller;
 
+import cn.itsource.aigou.domain.ProductParam;
 import cn.itsource.aigou.domain.Specification;
 import cn.itsource.aigou.service.IProductService;
 import cn.itsource.aigou.domain.Product;
@@ -199,6 +200,19 @@ public class ProductController {
                                           @RequestBody SkusVo skusVo){
         productService.saveSkuProperties(productId,skusVo.getSkuProperties(),skusVo.getSkus());
         return AjaxResult.me();
+    }
+
+    /**
+     * 在线商城搜索商品
+     */
+    /*@PostMapping("/queryOnsale")
+    public PageList<Product> queryOnSale(@RequestBody ProductParam param){
+        return productService.queryOnSale(param);
+    }*/
+
+    @PostMapping("/queryOnSale")
+    public PageList<Product> queryOnSale(@RequestBody ProductParam param){
+        return productService.queryOnSale(param);
     }
 
 }

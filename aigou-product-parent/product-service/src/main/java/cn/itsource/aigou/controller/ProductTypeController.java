@@ -4,6 +4,7 @@ import cn.itsource.aigou.domain.Product;
 import cn.itsource.aigou.service.IProductTypeService;
 import cn.itsource.aigou.domain.ProductType;
 import cn.itsource.aigou.query.ProductTypeQuery;
+import cn.itsource.aigou.vo.ProductTypeCrumbVo;
 import cn.itsource.basic.util.AjaxResult;
 import cn.itsource.basic.util.LetterUtil;
 import cn.itsource.basic.util.PageList;
@@ -111,6 +112,18 @@ public class ProductTypeController {
             e.printStackTrace();
             return AjaxResult.me().setSuccess(false).setMessage("失败!"+e.getMessage());
         }
+    }
+
+
+    /**
+       * 加载类型面包屑
+       * @param productTypeId
+       * @return
+       */
+    @GetMapping("/crumb")
+    public List<ProductTypeCrumbVo> loadTypeCrumb(@RequestParam("productTypeId")Long productTypeId){
+        System.out.println("--------------------"+productTypeId);
+        return productTypeService.loadTypeCrumb(productTypeId);
     }
 
 }

@@ -1,6 +1,7 @@
 package cn.itsource.aigou.service;
 
 import cn.itsource.aigou.domain.ProductType;
+import cn.itsource.aigou.vo.ProductTypeCrumbVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Component;
 
@@ -22,4 +23,12 @@ public interface IProductTypeService extends IService<ProductType> {
     List<ProductType> loadTypeTree();
 
     void genHomePage();
+
+    /**
+     *加载类型面包屑
+     * @param productTypeId
+     * @return
+     */
+    List<ProductTypeCrumbVo> loadTypeCrumb(Long productTypeId);
+
 }
