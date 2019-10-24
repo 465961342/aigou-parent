@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/sku")
@@ -94,5 +95,10 @@ public class SkuController {
     @GetMapping("/getPrice/{productId}")
     public List<Sku> getPrice(@PathVariable Long productId){
         return skuService.getPrice(productId);
+    }
+
+    @GetMapping("/skuChange")
+    public Map<String,Object> skuChange(@RequestParam("productId")Long productId,@RequestParam("indexs") String indexs){
+        return skuService.skuChange(productId,indexs);
     }
 }

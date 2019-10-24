@@ -1,10 +1,13 @@
 package cn.itsource.aigou.service.impl;
 
 import cn.itsource.aigou.client.ProductESClient;
+import cn.itsource.aigou.client.StaticPageClient;
 import cn.itsource.aigou.domain.*;
 import cn.itsource.aigou.mapper.*;
 import cn.itsource.aigou.query.ProductQuery;
 import cn.itsource.aigou.service.IProductService;
+import cn.itsource.aigou.service.IProductTypeService;
+import cn.itsource.aigou.vo.ProductTypeCrumbVo;
 import cn.itsource.basic.util.PageList;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -13,6 +16,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.netflix.discovery.converters.Auto;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +54,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Autowired
     private BrandMapper brandMapper;
+
+    @Autowired
+    private StaticPageClient staticPageClient;
+
+    @Autowired
+    private IProductTypeService typeService;
 
 
     @Override
@@ -212,7 +223,58 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         List<Product> products = baseMapper.selectBatchIds(idList);
         //保存到es中
         List<ProductDoc> productDocList = products2Docs(products);
+        //页面静态化商品详情页
+        staticDetailPage(products);
         productESClient.saveBatch(productDocList);
+    }
+    /**
+       * 批量商品详情页静态化
+       * @param products
+       */
+    private void staticDetailPage(List<Product> products) {
+
+        for (Product product : products) {
+            String templatePath = "D:\\Softwere\\IDEA\\aigou-parent\\aigou-product-parent\\product-service\\src\\main\\resources\\template\\product.detail.vm";
+            String targetPath = "D:\\Softwere\\IDEA\\aigou-web-parents\\ecommerce\\detail\\"+product.getId()+".html";
+            //数据
+            Map<String,Object> model = new HashMap<>();
+            //面包屑数据
+            List<ProductTypeCrumbVo> crumbs = typeService.loadTypeCrumb(product.getProductTypeId());
+            model.put("crumbs",crumbs);
+            model.put("product",product);
+            //sku
+            String skuProperties = product.getSkuProperties();
+            List<Specification> skus =
+                                JSONArray.parseArray(skuProperties,Specification.class);
+            model.put("skus",skus);
+            //viewProperties
+            String viewProperties = product.getViewProperties();
+            List<Specification> views = JSONArray.parseArray(viewProperties,
+                                Specification.class);
+            model.put("views",views);
+            //商品详情
+            ProductExt productExt = productExtMapper.selectOne(new
+                                QueryWrapper<ProductExt>().eq("productId", product.getId()));
+            String richContent = productExt.getRichContent();
+            model.put("richContent",richContent);
+            //商品的媒体属性
+            String mediasStr = product.getMedias();
+
+            String[] mediasArr = mediasStr.split(",");
+            List<List<String>> medias = new ArrayList<>();
+            for (String media : mediasArr) {
+                List<String> oneMedia = new ArrayList<>();
+                oneMedia.add("http://172.16.4.218"+media);
+                oneMedia.add("http://172.16.4.218"+media);
+                oneMedia.add("http://172.16.4.218"+media);
+                medias.add(oneMedia);
+            }
+            String images = JSON.toJSONString(medias);
+            model.put("medias",images);
+            //skuJSONStr
+            model.put("skuJSON",product.getSkuProperties());
+            staticPageClient.generateStaticPage(templatePath,targetPath,model);
+        }
     }
 
     /**

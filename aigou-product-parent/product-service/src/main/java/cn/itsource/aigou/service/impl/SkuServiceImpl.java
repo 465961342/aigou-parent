@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,5 +31,20 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements ISkuS
     @Override
     public List<Sku> getPrice(Long productId) {
         return baseMapper.selectList(new QueryWrapper<Sku>().eq("product_id", productId));
+    }
+
+
+    /**
+     * @param productId
+     * @param indexs
+     * @return
+     */
+    @Override
+    public Map<String, Object> skuChange(Long productId, String indexs) {
+        Sku sku = baseMapper.selectOne(new QueryWrapper<Sku>().eq("product_id", productId).eq("indexs", indexs));
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("price", sku.getPrice());
+        map.put("store", sku.getAvailableStock());
+        return map;
     }
 }

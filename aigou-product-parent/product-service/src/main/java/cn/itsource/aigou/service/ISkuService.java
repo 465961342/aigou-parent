@@ -4,6 +4,7 @@ import cn.itsource.aigou.domain.Sku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -21,4 +22,12 @@ public interface ISkuService extends IService<Sku> {
      * @return
      */
     List<Sku> getPrice(Long productId);
+
+    /**
+     *
+     * @param productId
+     * @param indexs
+     * @return
+     */
+    Map<String,Object> skuChange(Long productId, String indexs);
 }
